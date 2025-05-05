@@ -50,3 +50,14 @@ A multi-user Todo-list web application built in .NET 8.0 as part of the Storytel
 - Todo/         — Main web application (MVC pattern)
 - Todo.Tests/   — Unit tests using xUnit
 - Todo.sln      — Solution file
+
+## Enable Development Mode (Optional)
+
+To view detailed error messages while debugging, you can run the application in `Development` mode.
+
+This is useful when tracking issues like unhandled exceptions or seeing full stack traces.
+
+### Windows PowerShell
+```powershell
+- $env:ASPNETCORE_ENVIRONMENT = "Development"
+- dotnet run --project Todo
