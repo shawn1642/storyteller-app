@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Todo.Data.Entities;
 
@@ -11,7 +12,6 @@ namespace Todo.Data
         {
         }
 
-        
         public DbSet<TodoList> TodoLists { get; set; }
         public DbSet<TodoItem> TodoItems { get; set; }
 
@@ -30,6 +30,18 @@ namespace Todo.Data
                     .WithMany(p => p.Items)
                     .HasForeignKey(d => d.TodoListId);
             });
+        }
+
+        // Show todo lists where the current user is the owner or responsible for at least one item
+        public IQueryable<TodoList> RelevantTodoLists(string userId)
+        {
+            return TodoLists
+                .Include(tl => tl.Items)
+                .ThenInclude(i => i.ResponsibleParty)
+                .Where(tl =>
+                    tl.Owner.Id == userId || 
+                    tl.Items.Any(i => i.ResponsiblePartyId == userId)
+                );
         }
     }
 }
