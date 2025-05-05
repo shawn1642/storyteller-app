@@ -5,11 +5,17 @@
 
 @{
     ViewData["Title"] = $"List: {Model.Title}";
+    var hideCompleted = ViewData["HideCompleted"] as bool? ?? false;
+    var toggleUrl = Url.Action("Detail", new { todoListId = Model.TodoListId, hideCompleted = !hideCompleted });
+    var buttonText = hideCompleted ? "Show All" : "Hide Completed";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <div class="col-md-6">
+    <div class="mb-3">
+        <a href="@toggleUrl" class="btn btn-sm btn-outline-secondary">@buttonText</a>
+    </div>
 
     <ul class="list-group">
 
@@ -36,33 +42,26 @@
             }
 
             <li class="list-group-item @contextualClass">
-                
                 <div class="row">
-
-                <div class="col-md-8">
-                    <a asp-action="Edit" asp-controller="TodoItem" asp-route-todoItemId="@item.TodoItemId">
-
-                        @if (item.IsDone)
-                        {
-                            <s>@item.Title</s>
-                        }
-                        else
-                        {
-                            <text>@item.Title</text>
-                        }
-                    </a>
+                    <div class="col-md-8">
+                        <a asp-action="Edit" asp-controller="TodoItem" asp-route-todoItemId="@item.TodoItemId">
+                            @if (item.IsDone)
+                            {
+                                <s>@item.Title</s>
+                            }
+                            else
+                            {
+                                <text>@item.Title</text>
+                            }
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <small>
+                            @item.ResponsibleParty.UserName
+                            <img src="https://www.gravatar.com/avatar/@Gravatar.GetHash(item.ResponsibleParty.Email)?s=30" />
+                        </small>
+                    </div>
                 </div>
-
-                <div class="col-md-4 text-right">
-                    <small>
-                        @item.ResponsibleParty.UserName
-
-                        <img src="https://www.gravatar.com/avatar/@Gravatar.GetHash(item.ResponsibleParty.Email)?s=30"/>
-
-                    </small>
-                </div>
-                </div>
-
             </li>
         }
     </ul>
