@@ -27,19 +27,12 @@
 
         @foreach (var item in Model.Items)
         {
-            string contextualClass;
-            switch (item.Importance)
+            string contextualClass = item.Importance switch
             {
-                case Importance.High:
-                    contextualClass = "list-group-item-danger";
-                    break;
-                case Importance.Low:
-                    contextualClass = "list-group-item-info";
-                    break;
-                default:
-                    contextualClass = "";
-                    break;
-            }
+                Importance.High => "list-group-item-danger",
+                Importance.Low => "list-group-item-info",
+                _ => ""
+            };
 
             <li class="list-group-item @contextualClass">
                 <div class="row">
@@ -57,8 +50,10 @@
                     </div>
                     <div class="col-md-4 text-right">
                         <small>
-                            @item.ResponsibleParty.UserName
-                            <img src="https://www.gravatar.com/avatar/@Gravatar.GetHash(item.ResponsibleParty.Email)?s=30" />
+                            @item.ResponsibleParty.UserName (@item.ResponsibleParty.Email)
+                            <img src="https://www.gravatar.com/avatar/@Gravatar.GetHash(item.ResponsibleParty.Email)?s=30"
+                                 alt="User avatar"
+                                 onerror="this.onerror=null;this.src='https://www.gravatar.com/avatar/?d=mp&s=30';" />
                         </small>
                     </div>
                 </div>

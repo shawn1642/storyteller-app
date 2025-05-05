@@ -82,3 +82,30 @@ This approach keeps the filtering logic in the controller, avoids overloading th
     tl.Items.Any(i => i.ResponsiblePartyId == userId) (the user is assigned to at least one item).
     The TodoListController.Index() method uses this new query.
 
+### (Section 3: Advanced enhancements and APIs)
+
+### Task 8: Add Rank Field to TodoItem
+# Files Updated:
+Data/Entities/TodoItem.cs
+Models/TodoItems/TodoItemEditFields.cs
+Models/TodoItems/TodoItemSummaryViewmodel.cs
+EntityModelMappers/TodoItems/TodoItemEditFieldsFactory.cs
+EntityModelMappers/TodoItems/TodoItemSummaryViewmodelFactory.cs
+Views/TodoItem/Create.cshtml
+Views/TodoItem/Edit.cshtml
+
+# Issue:
+- The TodoItem model lacked a Rank field to represent ordering or priority beyond importance.
+
+# Solution:
+
+- Added Rank to the TodoItem entity.
+- Updated related viewmodels and their factories to support mapping.
+- Added inputs to both the Create and Edit forms.
+- Created and applied an EF Core migration to add the column to the database.
+
+# Logic:
+The update was done following the MVC architecture, ensuring separation of concerns. Form input is properly bound, validated, and persisted. This would set up potential ordering or custom list views for future improvements.
+
+
+
