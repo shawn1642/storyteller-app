@@ -107,5 +107,23 @@ Views/TodoItem/Edit.cshtml
 # Logic:
 The update was done following the MVC architecture, ensuring separation of concerns. Form input is properly bound, validated, and persisted. This would set up potential ordering or custom list views for future improvements.
 
+### Task 9: Enhance User Identification with Gravatar
+# Goal
+Display a user’s name alongside their email and profile image using the Gravatar API, with graceful fallback in case Gravatar is unavailable.
 
+# Approach
+User Information Formatting
+The view was updated to display the user's UserName followed by their Email:
+@item.ResponsibleParty.UserName (@item.ResponsibleParty.Email)
 
+# Gravatar Integration
+The user's email is hashed and passed to the Gravatar API to retrieve a profile image:
+<img src="https://www.gravatar.com/avatar/@Gravatar.GetHash(item.ResponsibleParty.Email)?s=30&d=mp"
+     alt="User avatar"
+     onerror="this.onerror=null;this.src='https://www.gravatar.com/avatar/?d=mp&s=30';" />
+
+# Fallback Handling
+The onerror attribute ensures that if the Gravatar service fails or the image is not found, a default image is shown (d=mp).
+
+# Impact
+The solution improves user identification clarity in the UI while preventing broken image links and maintaining a clean, professional display.
