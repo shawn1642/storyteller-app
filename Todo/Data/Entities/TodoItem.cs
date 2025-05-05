@@ -4,6 +4,8 @@ namespace Todo.Data.Entities {
     public class TodoItem
     {
         public int TodoItemId { get; set; }
+        public int Rank { get; set; }
+
         public string Title { get; set; }
         public string ResponsiblePartyId { get; set; }
         public IdentityUser ResponsibleParty { get; set; }

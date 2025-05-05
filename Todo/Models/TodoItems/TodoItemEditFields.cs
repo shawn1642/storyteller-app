@@ -5,6 +5,8 @@ namespace Todo.Models.TodoItems
     public class TodoItemEditFields
     {
         public int TodoListId { get; set; }
+        public int Rank { get; set; }
+
         public string Title { get; set; }
         public string TodoListTitle { get; set; }
         public int TodoItemId { get; set; }
@@ -14,7 +16,7 @@ namespace Todo.Models.TodoItems
 
         public TodoItemEditFields() { }
 
-        public TodoItemEditFields(int todoListId, string todoListTitle, int todoItemId, string title, bool isDone, string responsiblePartyId, Importance importance)
+        public TodoItemEditFields(int todoListId, string todoListTitle, int todoItemId, string title, bool isDone, string responsiblePartyId, Importance importance, int rank)
         {
             TodoListId = todoListId;
             TodoListTitle = todoListTitle;
@@ -23,6 +25,7 @@ namespace Todo.Models.TodoItems
             IsDone = isDone;
             ResponsiblePartyId = responsiblePartyId;
             Importance = importance;
+            Rank = rank;
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Todo.Models.TodoItems
     public class TodoItemCreateFields
     {
         public int TodoListId { get; set; }
+        public int Rank { get; set; }
         public string Title { get; set; }
         public string TodoListTitle { get; set; }
         public string ResponsiblePartyId { get; set; }

@@ -5,6 +5,8 @@ namespace Todo.Models.TodoItems
     public class TodoItemSummaryViewmodel
     {
         public int TodoItemId { get; }
+        public int Rank { get; set; } 
+
         public string Title { get; }
         public UserSummaryViewmodel ResponsibleParty { get; }
         public bool IsDone { get; }
@@ -18,13 +20,15 @@ namespace Todo.Models.TodoItems
         /// <param name="isDone">Whether the item is marked as done</param>
         /// <param name="responsibleParty">The user responsible for this item</param>
         /// <param name="importance">The importance level of this item</param>
-        public TodoItemSummaryViewmodel(int todoItemId, string title, bool isDone, UserSummaryViewmodel responsibleParty, Importance importance)
+        public TodoItemSummaryViewmodel(int todoItemId, string title, bool isDone, UserSummaryViewmodel responsibleParty, Importance importance, int rank)
         {
             TodoItemId = todoItemId;
             Title = title;
             IsDone = isDone;
             ResponsibleParty = responsibleParty;
             Importance = importance;
+            Rank = rank;
         }
+
     }
 }
