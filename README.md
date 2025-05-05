@@ -30,14 +30,20 @@ A multi-user Todo-list web application built in .NET 8.0 as part of the Storytel
 
 ## Troubleshooting
 
-- Issue: SSL error or port already in use
-- Solution: Run dotnet dev-certs https --trust and restart the app
+**Issue:** SSL error or port already in use  
+**Solution:** Run `dotnet dev-certs https --trust` and restart the app
 
-- Issue: Entity Framework or migration-related errors
-- Solution: Ensure the database is initialized properly, and all EF migrations are up to date
-
-- Issue: Branch error (e.g., main not found)
-- Solution: Run git checkout -b main origin/main to create a local tracking branch for main
+**Issue:** Entity Framework or migration-related errors  
+**Solution:**
+- Ensure the database is initialized properly
+- Run the following if you see errors like `no such table: AspNetUsers`:
+    - PowerShell (Windows only):
+    - Get-ChildItem -Recurse | Unblock-File
+    - dotnet tool restore
+    - cd Todo
+    - dotnet ef database update
+**Issue:** Branch error (e.g, `main` not found)  
+**Solution:** Run `git checkout -b main origin/main` to create a local tracking branch for `main`
 
 ## Project Structure
 
